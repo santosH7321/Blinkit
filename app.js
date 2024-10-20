@@ -7,13 +7,15 @@ const start = async () => {
   await connectDB(process.env.MONGO_URI);
 
   const app = Fastify();
-  const PORT = process.env.PORT || 3000;
+
+  await buildAdminRouter(app);
 
   app.listen({ port:PORT, host: "0.0.0.0" }, (err, addr) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(`Blinkit server on http://localhost:${PORT}`);
+      console.log(`Blinkit server on http://localhost:${PORT}${admin.options.rootPath}`);
+      
     }
   });
 };
