@@ -1,6 +1,9 @@
-const express = require("express");
+import "dotenv/config";
+import express from "express";
+import { connectDB } from "./src/config/connect.js";
 
 const start = async () => {
+  await connectDB(process.env.MONGO_URI);
   const app = express();
   const PORT = process.env.PORT || 3000;
 
